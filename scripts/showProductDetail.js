@@ -11,10 +11,17 @@ export const showProductDetail = function(id) {
 
     const button = document.createElement('button');
     card.appendChild(button);
-    button.innerHTML = product.isInCart ? 'Remove from cart' : 'Add to cart';
+    button.innerHTML = productService.isInCart(id) ? 'Remove from cart' : 'Add to cart';
 
     button.onclick = () => {
-        product.isInCart = !product.isInCart;
-        button.innerHTML = product.isInCart ? 'Remove from cart' : 'Add to cart';
+        let message = '';
+        if (productService.isInCart(product.id)){
+            productService.deleteFromCart(product.id);
+            message = 'Add to cart';
+        } else {
+            productService.addToCart(product.id);
+            message = 'Remove from cart';
+        }
+        button.innerHTML = message;
     }
 }

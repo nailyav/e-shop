@@ -1,8 +1,9 @@
 import ProductService from "./productService.js";
 
 export const showCart = function() {
-    let products = new ProductService();
-    const cart = [];
+    const productService = new ProductService();
+    const products = productService.getProductList();
+    let cart = productService.getCart();
 
     const wrapper = document.getElementById('cart-wrapper');
     const submitButton = document.getElementById('submit');
@@ -17,24 +18,21 @@ export const showCart = function() {
         setTimeout(function(){ alert.style.display = "none"; }, 1000);
     }
 
-    for (const product of products.getProductList()){
+    for (const id of cart){
+        const product = products.find(product => product.id == id);
 
-        if (product.isInCart){
-            cart.push(product);
+        const row = document.createElement('div');
+        wrapper.appendChild(row);
+        row.className = 'row';
 
-            const row = document.createElement('div');
-            wrapper.appendChild(row);
-            row.className = 'row';
+        row.innerHTML = `<img class="row-content" src="${product.img}" alt="${id}" style="height: 60px">`;
+        row.innerHTML += `<h3 class="row-content" style="margin-left: 70px">${product.name}</h3>`;
+        row.innerHTML += `<h3 class="row-content" style="right: 0">$${product.price}<button id="button${id}" style="margin-left: 20px">Remove</button></h3>`;
 
-            row.innerHTML = `<img class="row-content" src="${product.img}" alt="${product.id}" style="height: 60px">`;
-            row.innerHTML += `<h3 class="row-content" style="margin-left: 70px">${product.name}</h3>`;
-            row.innerHTML += `<h3 class="row-content" style="right: 0">$${product.price}<button id="button${product.id}" style="margin-left: 20px">Remove</button></h3>`;
-
-            const button = document.getElementById(`button${product.id}`);
-            button.onclick = () => {
-                product.isInCart = false;
-                row.remove();
-            }
+        const button = document.getElementById(`button${id}`);
+        button.onclick = () => {
+            cart = productService.deleteFromCart(id);
+            row.remove();
         }
     }
 }

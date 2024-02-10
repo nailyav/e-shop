@@ -4,6 +4,5 @@ export default class ProductCard {
         this.name = name;
         this.price = price;
         this.img = img;
-        this.isInCart = false;
     }
 }
