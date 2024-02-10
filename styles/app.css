@@ -102,7 +102,7 @@ button:hover{
 
 .alert {
     padding: 20px;
-    background-color: #a0da7e; /* Red */
+    background-color: #a0da7e;
     color: white;
     margin-bottom: 15px;
     opacity: 1;
