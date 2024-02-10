@@ -15,7 +15,7 @@ export const showCart = function() {
             alert.innerHTML = "No items in the cart!";
         }
         alert.style.display = "flex";
-        setTimeout(function(){ alert.style.display = "none"; }, 1000);
+        setTimeout(() => { alert.style.display = "none"; }, 1000);
     }
 
     for (const id of cart){

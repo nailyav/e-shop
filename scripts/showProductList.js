@@ -1,6 +1,6 @@
 import ProductService from "./productService.js";
 import Router from "./router.js";
-
+import { buttonHandle } from "./buttonHandle.js";
 
 export const showProducts = function() {
     const productService = new ProductService();
@@ -34,15 +34,7 @@ export const showProducts = function() {
         button.innerHTML = productService.isInCart(product.id) ? 'Remove from cart' : 'Add to cart';
 
         button.onclick = () => {
-            let message = '';
-            if (productService.isInCart(product.id)){
-                productService.deleteFromCart(product.id);
-                message = 'Add to cart';
-            } else {
-                productService.addToCart(product.id);
-                message = 'Remove from cart';
-            }
-            button.innerHTML = message;
+            button.innerHTML = buttonHandle(product.id);
         }
     }
 }

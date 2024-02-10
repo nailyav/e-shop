@@ -18,7 +18,7 @@ export default function ProductService() {
     };
 
     this.deleteProduct = function(id) {
-        const index = products.findIndex((product) => { return product.id === id });
+        const index = products.findIndex(product => product.id === id);
         
         try {
             products.splice(index, 1);

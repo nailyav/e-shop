@@ -23,6 +23,9 @@ export default class Router {
     }
   
     async loadRoute(url) {
+        if (url === "/index.html"){
+            url = '/';
+        }
         if (this.checkPath(url)){
             const route = this.routes[url] || this.routes["/product"];
             window.history.pushState({}, '', url);
